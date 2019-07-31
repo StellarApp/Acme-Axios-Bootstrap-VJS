@@ -34,19 +34,33 @@
         const URL="https://acme-users-api-rev.herokuapp.com/api/companies";
         const head = document.querySelector('thead');
         const title = document.querySelector('#title');
-        const tbody = document.querySelector('tbody')
-        const html = ''
+        const tbody = document.querySelector('tbody');
 
         axios.get(URL)
             .then(response => {
-                
-                response.data.forEach( (user) => {  
-                    html += '';
-                    
-                })
+                //adding table header
+                const titles = Object.keys(response.data[0]);
+                let titleHtml = '';
+                titles.forEach( title => {
+                    titleHtml += `<th scope='col'>${title[0].toUpperCase()}${title.slice(1)}</th>`
+                });
+                head.innerHTML = titleHtml;
+
+                //adding table body
+                let bodyHtml = '';
+                response.data.map(company => {
+                    let rowMiddleHtml = '';
+                    titles.map(title => {
+                        rowMiddleHtml += `<td>${company[title]}</td>`
+                    });
+                    // bodyHtml += rowStartHtml + rowMiddleHtml + rowEndHtml;
+                    bodyHtml += `<tr>${rowMiddleHtml}</tr>`
+
+                });
+                tbody.innerHTML = bodyHtml;
 
             })
-        
+
     </script>
 </body>
 </html>
