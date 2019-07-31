@@ -14,10 +14,10 @@
         <div class="container-fluid">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Companies</a>
+                    <a class="nav-link active" href="#companies">Companies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
+                    <a class="nav-link" href="#products">Products</a>
                 </li>
             </ul>
             <h2 id="title"></h2>
@@ -31,12 +31,28 @@
         </div>
     </div>
     <script>
-        const URL="https://acme-users-api-rev.herokuapp.com/api/companies";
+        const URL = "https://acme-users-api-rev.herokuapp.com/api/"
         const head = document.querySelector('thead');
         const title = document.querySelector('#title');
         const tbody = document.querySelector('tbody');
+        const companies = document.querySelector('#companies') ;
+        const products = document.querySelector('#products') ;
+        const tabs = document.querySelectorAll('.nav-link');
 
-        axios.get(URL)
+        // tabs.forEach(tab => {
+        //     tab.addEventListener('click', () => {
+        //     console.log(tab.textContent.toLowerCase())
+            
+        //     window.location.hash = tab; 
+        // });
+        // })
+
+
+        window.addEventListener()
+
+
+        const loadData = (URL) => {
+            axios.get(URL)
             .then(response => {
                 //adding table header
                 const titles = Object.keys(response.data[0]);
@@ -48,10 +64,10 @@
 
                 //adding table body
                 let bodyHtml = '';
-                response.data.map(company => {
+                response.data.map(ele => {
                     let rowMiddleHtml = '';
                     titles.map(title => {
-                        rowMiddleHtml += `<td>${company[title]}</td>`
+                        rowMiddleHtml += `<td>${ele[title]}</td>`
                     });
                     // bodyHtml += rowStartHtml + rowMiddleHtml + rowEndHtml;
                     bodyHtml += `<tr>${rowMiddleHtml}</tr>`
@@ -60,6 +76,8 @@
                 tbody.innerHTML = bodyHtml;
 
             })
+        }
+        // loadData(URL);
 
     </script>
 </body>
