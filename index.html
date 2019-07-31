@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js" defer></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-    <title>Document</title>
+    <title>ACME-AXIOS_BOOTSTRAP-VJS</title>
 </head>
 <body>
     <div class="container-fluid">
@@ -30,56 +31,7 @@
 
         </div>
     </div>
-    <script>
-        const URL = "https://acme-users-api-rev.herokuapp.com/api/"
-        const head = document.querySelector('thead');
-        const title = document.querySelector('#title');
-        const tbody = document.querySelector('tbody');
-        const companies = document.querySelector('#companies') ;
-        const products = document.querySelector('#products') ;
-        const tabs = document.querySelectorAll('.nav-link');
-
-        // tabs.forEach(tab => {
-        //     tab.addEventListener('click', () => {
-        //     console.log(tab.textContent.toLowerCase())
-            
-        //     window.location.hash = tab; 
-        // });
-        // })
-
-
-        window.addEventListener()
-
-
-        const loadData = (URL) => {
-            axios.get(URL)
-            .then(response => {
-                //adding table header
-                const titles = Object.keys(response.data[0]);
-                let titleHtml = '';
-                titles.forEach( title => {
-                    titleHtml += `<th scope='col'>${title[0].toUpperCase()}${title.slice(1)}</th>`
-                });
-                head.innerHTML = titleHtml;
-
-                //adding table body
-                let bodyHtml = '';
-                response.data.map(ele => {
-                    let rowMiddleHtml = '';
-                    titles.map(title => {
-                        rowMiddleHtml += `<td>${ele[title]}</td>`
-                    });
-                    // bodyHtml += rowStartHtml + rowMiddleHtml + rowEndHtml;
-                    bodyHtml += `<tr>${rowMiddleHtml}</tr>`
-
-                });
-                tbody.innerHTML = bodyHtml;
-
-            })
-        }
-        // loadData(URL);
-
-    </script>
+    
 </body>
 </html>
 
